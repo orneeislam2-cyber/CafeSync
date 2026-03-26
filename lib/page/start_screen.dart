@@ -1,3 +1,5 @@
+
+
 import 'package:cafesync/constant/color.dart';
 import 'package:cafesync/constant/image_string.dart';
 import 'package:cafesync/constant/text_string.dart';
@@ -6,6 +8,7 @@ import 'package:cafesync/widget/button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cafesync/page/login_screen.dart';
+import 'package:cafesync/page/wrapper.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
@@ -76,7 +79,7 @@ class StartScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const Home(),//LoginScreen(),
+                            builder: (context) => const Wrapper(), //LoginScreen(),
                           ),
                         ); //print("Button Clicked");
                       },

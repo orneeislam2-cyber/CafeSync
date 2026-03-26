@@ -1,0 +1,92 @@
+import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cafesync/widget/login_button.dart';
+import 'package:cafesync/page/home.dart';
+class Logout extends StatefulWidget {
+  const Logout({super.key});
+
+  @override
+  State<Logout> createState() => _LogoutState();
+}
+
+class _LogoutState extends State<Logout> {
+  final user=FirebaseAuth.instance.currentUser;
+  signout() async{
+    await FirebaseAuth.instance.signOut();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+     // backgroundColor: const Color(0xFF232227),
+      appBar:AppBar(
+        backgroundColor: const  Color(0xFFFFE6EC),//Color(0xFF232227),
+        centerTitle: true,
+        leading: IconButton(
+          icon: Icon(
+            Icons.close,
+            color: Colors.white,
+            size: 28,
+          ),
+          onPressed: () {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (_) => const Home()));
+          },
+        ),
+        title:  Text(
+          "Profile Details",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      body:Center(
+        child:
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+      Text(
+        "Welcome",
+        style: TextStyle(
+          fontSize: 28,
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+        ),
+      ),
+
+        const SizedBox(height: 10),
+
+            Text(
+              "${user?.displayName ?? "User"}",
+              style: const TextStyle(
+                fontSize: 24,
+                color: Colors.black,
+              ),
+            ),
+
+            const SizedBox(height: 10),
+
+        Text(
+          '${user!.email}',
+        style:  TextStyle(
+          fontSize: 18,
+          color: Colors.black,
+        ),
+      ),
+        const SizedBox(height: 40),
+
+
+        LoginButton(
+          title: "Logout",
+          onTap: signout,
+        ),
+        ],
+
+       ),
+      ),
+
+
+    );
+  }
+}
