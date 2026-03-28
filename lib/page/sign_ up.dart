@@ -193,7 +193,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController confirmPasswordController = TextEditingController();
 
   signUpUser() async {
-    // Password match check
+
     if (passwordController.text != confirmPasswordController.text) {
       /*ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Password does not match")),
@@ -210,7 +210,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
         .updateDisplayName(usernameController.text);
   }
     catch (e) {
-      print(e);
+      //print(e);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Signup failed")),
+      );
     }
   }
 

@@ -7,6 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:cafesync/widget/login_button.dart';
 import 'package:cafesync/page/sign_ up.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cafesync/page/forgotpassword.dart';
+
 /*ass LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
@@ -215,11 +217,18 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isPasswordHidden = true;
 
   loginUser() async {
+    try{
     await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: emailController.text.trim(),
       password: passwordController.text.trim(),
     );
+  }catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Login failed")),
+      );
+    }
   }
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -340,9 +349,19 @@ class _LoginScreenState extends State<LoginScreen> {
                               )
                             ],
                           ),
-                          const Text(
-                            "Forgot Password?",
-                            style: TextStyle(fontSize: 14),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const ForgotPassword(),
+                                ),
+                              );
+                            },
+                            child: const Text(
+                              "Forgot Password?",
+                              style: TextStyle(fontSize: 14),
+                            ),
                           ),
                         ],
                       ),

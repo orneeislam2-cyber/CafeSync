@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cafesync/widget/login_button.dart';
 import 'package:cafesync/page/home.dart';
+import 'package:cafesync/page/login_screen.dart';
 class Logout extends StatefulWidget {
   const Logout({super.key});
 
@@ -13,6 +14,10 @@ class _LogoutState extends State<Logout> {
   final user=FirebaseAuth.instance.currentUser;
   signout() async{
     await FirebaseAuth.instance.signOut();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const LoginScreen()),
+    );
   }
   @override
   Widget build(BuildContext context) {
@@ -24,7 +29,7 @@ class _LogoutState extends State<Logout> {
         leading: IconButton(
           icon: Icon(
             Icons.close,
-            color: Colors.white,
+            color: Colors.black,
             size: 28,
           ),
           onPressed: () {
@@ -35,7 +40,7 @@ class _LogoutState extends State<Logout> {
         title:  Text(
           "Profile Details",
           style: TextStyle(
-            color: Colors.white,
+            color: Colors.black,
             fontSize: 25,
             fontWeight: FontWeight.bold,
           ),

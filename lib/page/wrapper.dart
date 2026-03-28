@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cafesync/page/login_screen.dart';
 import 'package:cafesync/page/logout.dart';
+import 'package:cafesync/page/home.dart';
 class Wrapper extends StatefulWidget {
   const Wrapper({super.key});
 
@@ -17,7 +18,7 @@ class _WrapperState extends State<Wrapper> {
        stream:FirebaseAuth.instance.authStateChanges(),
        builder:(context,snapshot){
          if(snapshot.hasData){
-           return Logout();
+           return Home();
          }else{
            return LoginScreen();
          }
