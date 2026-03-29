@@ -43,6 +43,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         appBar:AppBar(
             backgroundColor: const  Color(0xFFFFFFFF),//Color(0xFF232227),
             centerTitle: true,
+          leadingWidth: 140,
             leading: GestureDetector(
               onTap: () {
                 Navigator.pushReplacement(

@@ -151,7 +151,7 @@ class _SingleItemPageState extends State<SingleItemPage> {
                           Text(
                             "Total: $totalPrice Tk",
                             style: const TextStyle(
-                                color: Colors.amber,
+                                color: Colors.white,
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -169,8 +169,11 @@ class _SingleItemPageState extends State<SingleItemPage> {
         ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(bottom: 45),
-        child: SingleItemNevBar(),
-      )
+        child: SingleItemNevBar(
+          item: widget.item,
+          quantity: quantity,
+        ),
+      ),
 
     );
   }

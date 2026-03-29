@@ -5,6 +5,7 @@ import 'package:cafesync/page/logout.dart';
 import 'package:cafesync/page/my_cart_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:cafesync/page/order_page.dart';
 
 class HomeNavBar extends StatelessWidget {
   const HomeNavBar({super.key});
@@ -79,13 +80,22 @@ class HomeNavBar extends StatelessWidget {
               ),
             ),
           ),
-
-          Icon(
+    InkWell(
+    onTap: () {
+    Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+    builder: (context) => const OrderPage (),
+    ),
+    );
+    },
+    child:Icon(
             Icons.receipt_long,
             color: Colors.white,
             size: 35,
           ),
 
+    ),
           InkWell(
             onTap: () {
               Navigator.pushReplacement(

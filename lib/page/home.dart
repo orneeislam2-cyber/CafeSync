@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cafesync/constant/item_model.dart';
 import 'package:cafesync/page/login_screen.dart';
+import 'package:cafesync/page/logout.dart';
+
 
 
 class Home extends StatelessWidget {
@@ -125,7 +127,7 @@ class Home extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const LoginScreen(),
+                builder: (context) => const Logout(),
               ),
             );
           },
@@ -140,7 +142,7 @@ class Home extends StatelessWidget {
                 Icon(Icons.person, color: Colors.white, size: 18),
                 SizedBox(width: 5),
                 Text(
-                  "Login",
+                  "Logout",
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
