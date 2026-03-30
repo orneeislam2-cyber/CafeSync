@@ -42,7 +42,7 @@ class ItemsWidget extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const SingleItemPage(),
+                        builder: (context) => const SingleItemPage(item: null,),
                       ),
                     ); //pr
                   },

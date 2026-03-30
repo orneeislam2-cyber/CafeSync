@@ -93,10 +93,10 @@ class Home extends StatelessWidget {
                   flex: 1,
                   child: TabBarView(
                     children: [
-                      ItemsWidget(),
-                      ItemsWidget(),
-                      ItemsWidget(),
-                      ItemsWidget(),
+                      ItemsWidget(items: [],),
+                      ItemsWidget(items: [],),
+                      ItemsWidget(items: [],),
+                      ItemsWidget(items: [],),
 
                      // Container(color: Colors.red),
                       //Container(color: Colors.red),
