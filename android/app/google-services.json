@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "390294311050",
+    "project_id": "cafesync-1",
+    "storage_bucket": "cafesync-1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:390294311050:android:674ee75de1da2dca129d73",
+        "android_client_info": {
+          "package_name": "com.example.cafesync"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAl7KCC4zAuK2BJnEj8gwUUqdUI3jQ8_BU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

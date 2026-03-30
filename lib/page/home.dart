@@ -4,6 +4,9 @@ import 'package:cafesync/widget/items_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cafesync/constant/item_model.dart';
+import 'package:cafesync/page/login_screen.dart';
+import 'package:cafesync/page/logout.dart';
+
 
 
 class Home extends StatelessWidget {
@@ -119,6 +122,36 @@ class Home extends StatelessWidget {
                           size: 35,
                         ),
                       ),*/
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Logout(),
+              ),
+            );
+          },
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            decoration: BoxDecoration(
+              color: Colors.orange,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Row(
+              children: const [
+                Icon(Icons.person, color: Colors.white, size: 18),
+                SizedBox(width: 5),
+                Text(
+                  "Logout",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
 
                     ],
                   ),

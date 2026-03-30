@@ -2,9 +2,16 @@ import 'package:cafesync/constant/color.dart';
 import 'package:cafesync/page/my_cart_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:cafesync/constant/cart_data.dart';
+import 'package:cafesync/constant/item_model.dart';
 
 class SingleItemNevBar extends StatelessWidget {
-  const SingleItemNevBar({super.key});
+  final Item item;
+  final int quantity;
+  const SingleItemNevBar({
+    super.key,required this.item,
+    required this.quantity,
+  });
 
 
 
@@ -17,17 +24,16 @@ class SingleItemNevBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            children: [
+
               Text(
-                'Total Price',
+      "${item.price * quantity} Tk",
                 style: TextStyle(
                   color: Colors.white60,
                   fontSize:20,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              SizedBox(height: 10),
+              /*SizedBox(height: 10),
               Text(
                 '350 Tk',
                 style: TextStyle(
@@ -38,9 +44,10 @@ class SingleItemNevBar extends StatelessWidget {
               ),
 
             ],
-          ),
+          ),*/
           InkWell(
             onTap: () {
+            CartData.addItem(item, quantity);
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -72,8 +79,8 @@ class SingleItemNevBar extends StatelessWidget {
                   ),
                   SizedBox(width: 10),
                   Icon(
-                    Icons.arrow_forward,
-                  )
+                    Icons.arrow_forward, color: Colors.white),
+
                 ],
               ),
             ),
