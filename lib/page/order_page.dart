@@ -1,18 +1,12 @@
-/*import 'package:flutter/material.dart';
 
-class OrderplacePage extends StatefulWidget {
-  const OrderplacePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-
-    );
-  }
-}*/
 import 'package:cafesync/constant/color.dart';
 import 'package:cafesync/widget/home_nav_bar.dart';
 import 'package:flutter/material.dart';
+//new imports
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cafesync/constant/cart_data.dart';
+import 'package:cafesync/page/home.dart';
 
 class OrderPage extends StatefulWidget {
   const OrderPage({super.key});
@@ -22,15 +16,26 @@ class OrderPage extends StatefulWidget {
 }
 
 class _OrderPageState extends State<OrderPage> {
+//new
+  final nameController = TextEditingController();
+  final phoneController = TextEditingController();
+  final emailController = TextEditingController();
+  final areaController = TextEditingController();
+  final addressController = TextEditingController();
+  final districtController = TextEditingController();
+  final paymentController = TextEditingController();
+  final promoCodeController = TextEditingController();
+//
 
   String deliveryType = "Home Delivery";
   String paymentMethod = "Cash on Delivery";
   String onlineMethod = "Bkash";
 
-  Widget buildTextField(String hint) {
+  Widget buildTextField(String hint,TextEditingController controller) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
       child: TextFormField(
+        controller: controller,
         decoration: InputDecoration(
           hintText: hint,
           filled: true,
@@ -48,6 +53,7 @@ class _OrderPageState extends State<OrderPage> {
 
   @override
   Widget build(BuildContext context) {
+    double totalPrice = CartData.getTotalPrice();
     return Scaffold(
       appBar: AppBar(
         title: const
@@ -67,9 +73,9 @@ class _OrderPageState extends State<OrderPage> {
 
             const SizedBox(height: 10),
 
-            buildTextField("Full Name"),
-            buildTextField("Phone Number"),
-            buildTextField("Email"),
+            buildTextField("Full Name", nameController),
+            buildTextField("Phone Number",phoneController),
+            buildTextField("Email",emailController),
 
             const SizedBox(height: 10),
 
@@ -79,21 +85,25 @@ class _OrderPageState extends State<OrderPage> {
 
             const SizedBox(height: 10),
 
-            buildTextField("Area"),
-            buildTextField("House/Road No"),
-            buildTextField("District"),
+            buildTextField("Area",areaController),
+            buildTextField("House/Road No",addressController),
+            buildTextField("District",districtController),
 
             const SizedBox(height: 10),
 
-            /// 🔶 Total Price
+
             const Text("Total Price",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
 
-            buildTextField("350 Tk"),
+
+            Text(
+              "Total: $totalPrice Tk",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
 
             const SizedBox(height: 10),
 
-            // Delivery Options
+
             const Text("Delivery Options",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
 
@@ -117,7 +127,7 @@ class _OrderPageState extends State<OrderPage> {
 
             const SizedBox(height: 10),
 
-            // Payment Method
+
             const Text("Payment Method",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
 
@@ -139,7 +149,7 @@ class _OrderPageState extends State<OrderPage> {
               },
             ),
 
-            // Online Payment Options
+
             if (paymentMethod == "Online Payment") ...[
 
               RadioListTile(
@@ -169,20 +179,21 @@ class _OrderPageState extends State<OrderPage> {
                 },
               ),
 
-              buildTextField("Enter Payment Number"),
+             // buildTextField("Enter Payment Number"),
+              buildTextField("Enter Payment Number",paymentController), // temporary fix
             ],
 
             const SizedBox(height: 10),
 
-            // Promo Code
+
             const Text("Promo Code",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
 
-            buildTextField("Enter Promo Code"),
+            buildTextField("Enter Promo Code",promoCodeController),
 
             const SizedBox(height: 25),
 
-            // Confirm Button
+
             SizedBox(
               width: double.infinity,
               height: 55,
@@ -193,7 +204,48 @@ class _OrderPageState extends State<OrderPage> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-                onPressed: () {},
+
+                onPressed: () async {
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user == null) {
+    ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(content: Text("Please login first")),
+    );
+    return;
+    }
+
+    await FirebaseFirestore.instance.collection('orders').add({
+    'userId': user.uid,
+    'name': nameController.text,
+    'phone': phoneController.text,
+    'email': emailController.text,
+    'area': areaController.text,
+    'address': addressController.text,
+    'district': districtController.text,
+    'totalPrice': totalPrice,
+    'deliveryType': deliveryType,
+    'paymentMethod': paymentMethod,
+    'status': 'confirmed',
+    'timestamp': FieldValue.serverTimestamp(),
+    });
+
+
+    CartData.cartItems.clear();
+
+
+    ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(content: Text("Order Confirmed ✅")),
+    );
+
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => const Home()),
+          (route) => false,
+    );
+    },
+
+
                 child: const Text(
                   "Confirm Order",
                   style: TextStyle(fontSize: 18),

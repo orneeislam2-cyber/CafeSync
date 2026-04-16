@@ -12,7 +12,8 @@ class ItemsWidget extends StatelessWidget {
 
 
     return GridView.builder(
-      physics: NeverScrollableScrollPhysics(), // scroll handled by parent
+     // physics: NeverScrollableScrollPhysics(),
+      physics: BouncingScrollPhysics(),
       shrinkWrap: true,
       padding: EdgeInsets.zero,
       itemCount: items.length,

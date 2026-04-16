@@ -22,7 +22,7 @@ class _LogoutState extends State<Logout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     // backgroundColor: const Color(0xFF232227),
+
       appBar:AppBar(
         backgroundColor: const  Color(0xFFFFE6EC),//Color(0xFF232227),
         centerTitle: true,

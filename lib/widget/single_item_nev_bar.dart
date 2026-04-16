@@ -1,3 +1,4 @@
+
 import 'package:cafesync/constant/color.dart';
 import 'package:cafesync/page/my_cart_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -33,18 +34,7 @@ class SingleItemNevBar extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              /*SizedBox(height: 10),
-              Text(
-                '350 Tk',
-                style: TextStyle(
-                  color: Colors.white60,
-                  fontSize:20,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
 
-            ],
-          ),*/
           InkWell(
             onTap: () {
             CartData.addItem(item, quantity);
